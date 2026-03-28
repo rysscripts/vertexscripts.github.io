@@ -1125,36 +1125,55 @@
 .ticker-bar {
   overflow: hidden;
   width: 100%;
-  background: rgba(8,20,18,0.8);
-  border-top: 1px solid rgba(70,199,160,0.2);
-  border-bottom: 1px solid rgba(70,199,160,0.2);
+  background: rgba(8,20,18,0.6);
+  border-top: 1px solid rgba(70,199,160,0.15);
+  border-bottom: 1px solid rgba(70,199,160,0.15);
+  margin: 18px 0;
+  border-radius: 12px;
   mask-image: linear-gradient(to right, transparent, white 10%, white 90%, transparent);
 }
 
 .ticker-track {
   display: flex;
-  gap: 40px;
+  gap: 28px;
   width: max-content;
-  animation: tickerScroll 20s linear infinite;
+  animation: tickerScroll 22s linear infinite;
 }
 
 .ticker-track span {
   white-space: nowrap;
-  font-weight: 700;
+  font-weight: 600;
+  font-size: 0.9rem;
   color: #cffff1;
-  padding: 12px 0;
+  padding: 8px 0;
+  opacity: 0.9;
+}
+
+/* 🔥 glow pulse effect */
+.pulse {
+  color: #8effc4;
+  animation: glowPulse 1.8s ease-in-out infinite;
 }
 
 /* animation */
 @keyframes tickerScroll {
-  0% {
-    transform: translateX(0%);
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+/* glow animation */
+@keyframes glowPulse {
+  0%, 100% {
+    text-shadow: 0 0 6px rgba(70,199,160,0.4),
+                 0 0 12px rgba(70,199,160,0.2);
   }
-  100% {
-    transform: translateX(-50%);
+  50% {
+    text-shadow: 0 0 12px rgba(70,199,160,0.9),
+                 0 0 24px rgba(70,199,160,0.5);
   }
 }
 
+/* pause on hover */
 .ticker-bar:hover .ticker-track {
   animation-play-state: paused;
 }
@@ -1164,19 +1183,18 @@
   <div class="ticker-track">
     <span>🛠️ MM2 Script Fixed</span>
     <span>⭐ Adopt Me Script Updated</span>
-    <span>🔥 Blade Ball Trending</span>
+    <span class="pulse">🔥 Blade Ball Trending</span>
     <span>🚧 PS99 In Development</span>
-    <span>⚡ Steal A Brainrot Active</span>
+    <span class="pulse">⚡ Steal A Brainrot Active</span>
 
     <!-- duplicate for smooth loop -->
     <span>🛠️ MM2 Script Fixed</span>
     <span>⭐ Adopt Me Script Updated</span>
-    <span>🔥 Blade Ball Trending</span>
+    <span class="pulse">🔥 Blade Ball Trending</span>
     <span>🚧 PS99 In Development</span>
-    <span>⚡ Steal A Brainrot Active</span>
+    <span class="pulse">⚡ Steal A Brainrot Active</span>
   </div>
 </div>
-
       <div class="hero-actions">
         <a href="#latest-scripts" class="hero-cta">Browse Scripts</a>
         <a href="#latest-scripts" class="hero-cta ghost">Latest Scripts</a>
