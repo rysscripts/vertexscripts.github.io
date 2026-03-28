@@ -1706,19 +1706,20 @@
       }
     }
 
-    async function copyText(text, message = 'Script copied successfully ✨') {
-      try {
-        await navigator.clipboard.writeText(text);
-      } catch {
-        const area = document.createElement('textarea');
-        area.value = text;
-        document.body.appendChild(area);
-        area.select();
-        document.execCommand('copy');
-        area.remove();
-      }
-      showToast(message);
-    }
+async function copyText(text, message = 'Copied successfully ✨') {
+  try {
+    await navigator.clipboard.writeText(text);
+  } catch {
+    const area = document.createElement('textarea');
+    area.value = text;
+    document.body.appendChild(area);
+    area.select();
+    document.execCommand('copy');
+    area.remove();
+  }
+
+  showToastOnce(message); // @vertexscripts
+}
 
     function applyFilters() {
       const query = searchInput.value.trim().toLowerCase();
