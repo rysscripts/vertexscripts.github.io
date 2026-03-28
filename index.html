@@ -1120,22 +1120,62 @@
       <div class="eyebrow"><span class="dot"></span> Clean • Fast • Premium Script Hub</div>
       <h1 class="hero-title">VERTEX <span class="accent">SCRIPTS</span></h1>
       <p class="hero-subtitle">Working &amp; Tested Scripts 🌟</p>
-      <div class="hero-meta">Clean • Modern • Responsive • Script Library</div>
 
-      <div class="ticker-bar">
-        <div class="ticker-track">
-          <span>🛠️ MM2 Script Fixed</span>
-          <span>⭐ Adopt Me Script Updated</span>
-          <span>🔥 Blade Ball Trending</span>
-          <span>🚧 PS99 In Development</span>
-          <span>⚡ Steal A Brainrot Active</span>
-          <span>🛠️ MM2 Script Fixed</span>
-          <span>⭐ Adopt Me Script Updated</span>
-          <span>🔥 Blade Ball Trending</span>
-          <span>🚧 PS99 In Development</span>
-          <span>⚡ Steal A Brainrot Active</span>
-        </div>
-      </div>
+<style>
+.ticker-bar {
+  overflow: hidden;
+  width: 100%;
+  background: rgba(8,20,18,0.8);
+  border-top: 1px solid rgba(70,199,160,0.2);
+  border-bottom: 1px solid rgba(70,199,160,0.2);
+  mask-image: linear-gradient(to right, transparent, white 10%, white 90%, transparent);
+}
+
+.ticker-track {
+  display: flex;
+  gap: 40px;
+  width: max-content;
+  animation: tickerScroll 20s linear infinite;
+}
+
+.ticker-track span {
+  white-space: nowrap;
+  font-weight: 700;
+  color: #cffff1;
+  padding: 12px 0;
+}
+
+/* animation */
+@keyframes tickerScroll {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.ticker-bar:hover .ticker-track {
+  animation-play-state: paused;
+}
+</style>
+
+<div class="ticker-bar">
+  <div class="ticker-track">
+    <span>🛠️ MM2 Script Fixed</span>
+    <span>⭐ Adopt Me Script Updated</span>
+    <span>🔥 Blade Ball Trending</span>
+    <span>🚧 PS99 In Development</span>
+    <span>⚡ Steal A Brainrot Active</span>
+
+    <!-- duplicate for smooth loop -->
+    <span>🛠️ MM2 Script Fixed</span>
+    <span>⭐ Adopt Me Script Updated</span>
+    <span>🔥 Blade Ball Trending</span>
+    <span>🚧 PS99 In Development</span>
+    <span>⚡ Steal A Brainrot Active</span>
+  </div>
+</div>
 
       <div class="hero-actions">
         <a href="#latest-scripts" class="hero-cta">Browse Scripts</a>
