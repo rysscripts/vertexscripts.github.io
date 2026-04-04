@@ -1228,16 +1228,16 @@
       </div>
 
       <div class="grid cards-2">
-        <article class="card glass spotlight searchable"
-          data-name="mm2 script murder mystery 2"
-          data-category="script"
-          data-title="MM2 Script"
-          data-detail="loadstring(game:HttpGet('https://raw.githubusercontent.com/rysscripts/mm2/refs/heads/main/loader.lua'))()"
-          data-copy="loadstring(game:HttpGet('https://raw.githubusercontent.com/rysscripts/mm2/refs/heads/main/loader.lua'))()">
+<article class="card glass spotlight searchable"
+  data-name="mm2 script murder mystery 2"
+  data-category="script"
+  data-title="MM2 Script"
+  data-detail="loadstring(game:HttpGet('https://raw.githubusercontent.com/rysscripts/mm2/refs/heads/main/loader.lua"
+  data-copy="loadstring(game:HttpGet('https://raw.githubusercontent.com/rysscripts/mm2/refs/heads/main/loader.lua"
+  data-image="images/mm2.png"
+  data-video="videos/mm2.mp4">
           <div class="top-row">
             <div class="app-icon">
-              <!-- replace with your real image -->
-              <img src="images/mm2.png" alt="MM2 Script" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=&quot;icon-letter&quot;>MM</div>';">
             </div>
             <span class="pill">MM2</span>
           </div>
@@ -1583,6 +1583,8 @@
       <div class="pill" style="margin-bottom:14px;">Quick View</div>
       <h3 id="modalTitle" style="margin-top:0;">Title</h3>
       <p id="modalDetail" class="muted">Details go here.</p>
+      <video id="modalVideo" style="width:100%;margin-top:10px;display:none;" autoplay muted loop></video>
+<img id="modalImage" style="width:100%;margin-top:10px;display:none;">
       <a id="modalLink" class="modal-link" href="#" target="_blank" rel="noopener noreferrer" style="display:none;">
         <span id="modalLinkText">Open link</span><span>↗</span>
       </a>
@@ -1871,6 +1873,8 @@
     document.querySelectorAll('.open-modal').forEach(button => {
       button.addEventListener('click', event => {
         const card = event.currentTarget.closest('[data-title]');
+        const video = card.dataset.video;
+const image = card.dataset.image;
         modalTitle.textContent = card?.dataset.title || 'Preview';
         modalDetail.textContent = card?.dataset.detail || 'Script details.';
         currentModalText = card?.dataset.copy || card?.dataset.detail || 'Script details.';
@@ -1888,7 +1892,21 @@
           modalLinkText.textContent = 'Open link';
         }
 
-        modal.style.display = 'flex';
+// show video or image
+if (video) {
+  document.getElementById("modalVideo").style.display = "block";
+  document.getElementById("modalVideo").src = video;
+
+  document.getElementById("modalImage").style.display = "none";
+} 
+else if (image) {
+  document.getElementById("modalImage").style.display = "block";
+  document.getElementById("modalImage").src = image;
+
+  document.getElementById("modalVideo").style.display = "none";
+}
+
+modal.style.display = 'flex';
       });
     });
 
