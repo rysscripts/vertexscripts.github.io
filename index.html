@@ -1881,7 +1881,11 @@
 const image = card.dataset.image;
 const modalImage = document.getElementById("modalImage");
         modalTitle.textContent = card?.dataset.title || 'Preview';
+        currentModalText = card?.dataset.copy || card?.dataset.detail || '';
 modalDetail.textContent = "Click copy to get the script.";
+        copyBtn.onclick = () => {
+  navigator.clipboard.writeText(currentModalText);
+};
 
         const detail = card?.dataset.detail || '';
         const isLink = /^https?:\/\//.test(detail);
