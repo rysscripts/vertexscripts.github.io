@@ -1789,10 +1789,10 @@ body {
     <div class="live-feed-item" id="liveFeedItem">🔥 @Masonhub copied MM2 Script</div>
   </div>
 
-  <div class="toast" id="toast">
-    <div class="toast-badge">📋</div>
-    <div><strong>Copied Successfully ✨</strong><br><span id="toastText">Script copied to clipboard.</span></div>
-  </div>
+<div class="toast" id="toast">
+  <div class="toast-badge">✨</div>
+  <div><strong id="toastTitle">Notice</strong><br><span id="toastText">Done.</span></div>
+</div>
 
   <button class="back-top" id="backTop" aria-label="Back to top">↑</button>
 
@@ -2273,12 +2273,7 @@ body {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-      themeToggle.addEventListener('click', () => {
-      lightMode = !lightMode;
-      document.body.classList.toggle('light-mode', lightMode);
-      showToast(lightMode ? 'Light mode enabled.' : 'Dark mode enabled.');
-    });
-
+  V
     adminBtn.addEventListener('click', async () => {
       if (!supabaseClient) {
         showToast('Admin unavailable ⚙️');
