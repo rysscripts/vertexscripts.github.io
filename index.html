@@ -961,10 +961,116 @@
       z-index: 70;
     }
 
-    .modal-card {
-      width: min(720px, 100%);
-      padding: 24px 24px 20px;
+        .modal-card {
+      width: min(760px, 100%);
+      padding: 28px 28px 24px;
       position: relative;
+      border-radius: 28px;
+      border: 1px solid rgba(70,199,160,0.18);
+      background:
+        linear-gradient(180deg, rgba(7,18,42,0.96), rgba(4,12,30,0.98));
+      box-shadow:
+        0 30px 90px rgba(0,0,0,0.52),
+        0 0 0 1px rgba(141,240,209,0.04) inset,
+        0 0 50px rgba(70,199,160,0.08);
+      overflow: hidden;
+      animation: modalPop .28s ease;
+    }
+
+    .modal-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.08), transparent 24%),
+        radial-gradient(circle at top right, rgba(141,240,209,0.12), transparent 30%);
+    }
+
+    .modal-media-wrap {
+      margin-top: 16px;
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1px solid rgba(70,199,160,0.14);
+      background: rgba(5,16,14,0.9);
+      box-shadow: inset 0 0 0 1px rgba(70,199,160,0.04);
+    }
+
+    .modal-meta-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin: 0 0 14px;
+    }
+
+    .modal-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 13px;
+      border-radius: 999px;
+      background: rgba(16,38,33,0.88);
+      border: 1px solid rgba(70,199,160,0.16);
+      color: #c8fff0;
+      font-size: .8rem;
+      font-weight: 800;
+      letter-spacing: .02em;
+    }
+
+    .modal-chip.live::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #4af59a;
+      box-shadow: 0 0 12px rgba(74,245,154,0.72);
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    #modalTitle {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: .95;
+      letter-spacing: -.06em;
+      font-style: italic;
+      margin-bottom: 12px;
+    }
+
+    #modalDetail {
+      color: #c7e8df;
+      line-height: 1.75;
+      margin-bottom: 0;
+    }
+
+    #modalImage,
+    #modalVideo {
+      width: 100%;
+      display: none;
+      border-radius: 0;
+      max-height: 420px;
+      object-fit: cover;
+    }
+
+    @keyframes modalPop {
+      0% { opacity: 0; transform: translateY(18px) scale(.97); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @media (max-width: 640px) {
+      .modal-card {
+        padding: 20px 18px 18px;
+        border-radius: 24px;
+      }
+
+      .modal-actions {
+        flex-direction: column;
+      }
     }
 
     .close-btn {
@@ -1232,8 +1338,8 @@
   data-name="mm2 script murder mystery 2"
   data-category="script"
   data-title="MM2 Script"
-  data-detail="loadstring(game:HttpGet('https://raw.githubusercontent.com/rysscripts/mm2/refs/heads/main/loader.lua"
-  data-copy="loadstring(game:HttpGet('https://raw.githubusercontent.com/rysscripts/mm2/refs/heads/main/loader.lua"
+  data-detail="loadstring(game:HttpGet('https://raw.githubusercontent.com/rysscripts/mm2/refs/heads/main/loader.lua'))()"
+  data-copy="loadstring(game:HttpGet('https://raw.githubusercontent.com/rysscripts/mm2/refs/heads/main/loader.lua'))()"
   data-image="images/mm2.png"
   data-video="videos/mm2.mp4">
           <div class="top-row">
@@ -1253,7 +1359,7 @@
           <div class="code">loadstring(game:HttpGet('https://raw.githubusercontent.com/rysscripts/mm2/refs/heads/main/loader.lua'))()</div>
           <div class="btn-row">
             <button class="btn copy-btn" data-script-name="MM2 Script" data-copy="loadstring(game:HttpGet('https://raw.githubusercontent.com/rysscripts/mm2/refs/heads/main/loader.lua'))()">Copy Script</button>
-            <button class="btn secondary open-modal">Quick View</button>
+            <button class="btn secondary open-modal">Preview</button>
           </div>
         </article>
 
@@ -1282,7 +1388,7 @@
           <div class="code">loadstring(game:HttpGet('https://raw.githubusercontent.com/rysscripts/adoptme/refs/heads/main/loader.lua'))()</div>
           <div class="btn-row">
             <button class="btn copy-btn" data-script-name="Adopt Me Script" data-copy="loadstring(game:HttpGet('https://raw.githubusercontent.com/rysscripts/adoptme/refs/heads/main/loader.lua'))()">Copy Script</button>
-            <button class="btn secondary open-modal">Quick View</button>
+            <button class="btn secondary open-modal">Preview</button>
           </div>
         </article>
 
@@ -1310,7 +1416,7 @@
           <div class="code">Pet Simulator 99 Script is currently in development.</div>
           <div class="btn-row">
             <button class="btn copy-btn" data-script-name="Pet Simulator 99 Script" data-copy="Pet Simulator 99 Script is currently in development.">Copy Script</button>
-            <button class="btn secondary open-modal">Quick View</button>
+            <button class="btn secondary open-modal">Preview</button>
           </div>
         </article>
 
@@ -1339,7 +1445,7 @@
           <div class="code">https://pastefy.app/PeXTBlNh/raw</div>
           <div class="btn-row">
             <button class="btn copy-btn" data-script-name="Steal A Brainrot Script" data-copy="https://pastefy.app/PeXTBlNh/raw">Copy Script</button>
-            <button class="btn secondary open-modal">Quick View</button>
+            <button class="btn secondary open-modal">Preview</button>
           </div>
         </article>
 
@@ -1368,7 +1474,7 @@
           <div class="code">loadstring(game:HttpGet('https://pastefy.app/6Mzmod71/raw'))()</div>
           <div class="btn-row">
             <button class="btn copy-btn" data-script-name="Blade Ball Script" data-copy="loadstring(game:HttpGet('https://pastefy.app/6Mzmod71/raw'))()">Copy Script</button>
-            <button class="btn secondary open-modal">Quick View</button>
+            <button class="btn secondary open-modal">Preview</button>
           </div>
         </article>
       </div>
@@ -1584,16 +1690,27 @@
   <div class="modal" id="modal">
     <div class="modal-card glass">
       <button class="close-btn" id="closeModal">✕</button>
-      <div class="pill" style="margin-bottom:14px;">Quick View</div>
+
+      <div class="pill" style="margin-bottom:14px;">Preview</div>
+
+      <div class="modal-meta-row">
+        <span class="modal-chip live">Live Preview</span>
+        <span class="modal-chip">Premium Card</span>
+      </div>
+
       <h3 id="modalTitle" style="margin-top:0;">Title</h3>
       <p id="modalDetail" class="muted">Details go here.</p>
-      <img id="modalImage" style="width:100%;margin-top:10px;display:none;">
-      <video id="modalVideo" style="width:100%;margin-top:10px;display:none;" autoplay muted loop></video>
-<img id="modalImage" style="width:100%;margin-top:10px;display:none;">
+
+      <div class="modal-media-wrap">
+        <img id="modalImage" alt="Preview image" loading="lazy">
+        <video id="modalVideo" autoplay muted loop playsinline></video>
+      </div>
+
       <a id="modalLink" class="modal-link" href="#" target="_blank" rel="noopener noreferrer" style="display:none;">
         <span id="modalLinkText">Open link</span><span>↗</span>
       </a>
-      <div class="btn-row" style="margin-top:18px;">
+
+      <div class="modal-actions">
         <button class="btn" id="modalCopy">Copy Script</button>
         <button class="btn secondary" id="modalDismiss">Close</button>
       </div>
@@ -1615,7 +1732,7 @@
 
     const backTop = document.getElementById('backTop');
 
-    const modal = document.getElementById('modal');
+       const modal = document.getElementById('modal');
     const modalTitle = document.getElementById('modalTitle');
     const modalDetail = document.getElementById('modalDetail');
     const modalDismiss = document.getElementById('modalDismiss');
@@ -1623,6 +1740,8 @@
     const modalCopy = document.getElementById('modalCopy');
     const modalLink = document.getElementById('modalLink');
     const modalLinkText = document.getElementById('modalLinkText');
+    const modalImage = document.getElementById('modalImage');
+    const modalVideo = document.getElementById('modalVideo');
 
     const reveals = document.querySelectorAll('.reveal');
     const counters = document.querySelectorAll('.counter');
@@ -1806,8 +1925,18 @@
     }
 
     function closeModalFn() {
-      document.getElementById("modalImage").style.display = "none";
       modal.style.display = 'none';
+
+      modalImage.style.display = 'none';
+      modalImage.src = '';
+
+      modalVideo.style.display = 'none';
+      modalVideo.pause();
+      modalVideo.src = '';
+
+      modalLink.style.display = 'none';
+      modalLink.href = '#';
+      modalLinkText.textContent = 'Open link';
     }
 
     function randomUsername() {
@@ -1879,35 +2008,45 @@
     document.querySelectorAll('.open-modal').forEach(button => {
       button.addEventListener('click', event => {
         const card = event.currentTarget.closest('[data-title]');
-const image = card.dataset.image;
-const modalImage = document.getElementById("modalImage");
-        modalTitle.textContent = card?.dataset.title || 'Preview';
-        currentModalText = card?.dataset.copy || card?.dataset.detail || '';
-modalDetail.textContent = "Click copy to get the script.";
-        copyBtn.onclick = () => {
-  navigator.clipboard.writeText(currentModalText);
-};
+        if (!card) return;
 
-        const detail = card?.dataset.detail || '';
-        const isLink = /^https?:\/\//.test(detail);
+        const title = card.dataset.title || 'Preview';
+        const detail = card.dataset.detail || '';
+        const image = card.dataset.image || '';
+        const video = card.dataset.video || '';
 
-        if (isLink) {
-          modalLink.href = detail;
-          modalLinkText.textContent = detail;
-          modalLink.style.display = 'inline-flex';
-        } else {
-          modalLink.style.display = 'none';
-          modalLink.href = '#';
-          modalLinkText.textContent = 'Open link';
+        modalTitle.textContent = title;
+        modalDetail.textContent = detail || 'Preview not available.';
+        currentModalText = card.dataset.copy || detail || '';
+
+        modalImage.style.display = 'none';
+        modalImage.src = '';
+
+        modalVideo.style.display = 'none';
+        modalVideo.pause();
+        modalVideo.src = '';
+
+        modalLink.style.display = 'none';
+        modalLink.href = '#';
+        modalLinkText.textContent = 'Open link';
+
+        if (image) {
+          modalImage.src = image;
+          modalImage.style.display = 'block';
         }
 
-// show image
-if (image) {
-  modalImage.style.display = "block";
-  modalImage.src = image;
-}
+        if (video) {
+          modalVideo.src = video;
+          modalVideo.style.display = 'block';
+        }
 
-modal.style.display = 'flex';
+        if (/^https?:\/\//.test(detail)) {
+          modalLink.href = detail;
+          modalLinkText.textContent = 'Open link';
+          modalLink.style.display = 'inline-flex';
+        }
+
+        modal.style.display = 'flex';
       });
     });
 
