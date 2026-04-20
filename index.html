@@ -1789,10 +1789,10 @@ body {
     <div class="live-feed-item" id="liveFeedItem">🔥 @Masonhub copied MM2 Script</div>
   </div>
 
-<div class="toast" id="toast">
-  <div class="toast-badge">✨</div>
-  <div><strong id="toastTitle">Notice</strong><br><span id="toastText">Done.</span></div>
-</div>
+  <div class="toast" id="toast">
+    <div class="toast-badge">✨</div>
+    <div><strong id="toastTitle">Notice</strong><br><span id="toastText">Done.</span></div>
+  </div>
 
   <button class="back-top" id="backTop" aria-label="Back to top">↑</button>
 
@@ -1891,7 +1891,13 @@ body {
     const COPY_COOLDOWN_PREFIX = 'vertex_copy_cooldown_';
     const SCRIPT_NAMES = ['MM2 Script', 'Adopt Me Script', 'Steal A Brainrot Script', 'Blade Ball Script', 'Pet Simulator 99 Script'];
 
-    function showToast(message) {
+    function showToast(message, title = 'Notice', icon = '✨') {
+      const toastTitle = document.getElementById('toastTitle');
+      const toastBadge = document.querySelector('.toast-badge');
+
+      if (toastTitle) toastTitle.textContent = title;
+      if (toastBadge) toastBadge.textContent = icon;
+
       toastText.textContent = message;
       toast.classList.remove('show');
       void toast.offsetWidth;
@@ -1991,7 +1997,7 @@ body {
       }
     }
 
-    async function copyText(text, message = 'Script copied successfully ✨') {
+     async function copyText(text, message = 'Script copied successfully ✨') {
       try {
         await navigator.clipboard.writeText(text);
       } catch {
@@ -2002,7 +2008,7 @@ body {
         document.execCommand('copy');
         area.remove();
       }
-      showToast(message);
+      showToast(message, 'Copied Successfully ✨', '📋');
     }
 
     function applyFilters() {
@@ -2273,7 +2279,17 @@ body {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-  
+    themeToggle.addEventListener('click', () => {
+      lightMode = !document.body.classList.contains('light-mode');
+      document.body.classList.toggle('light-mode', lightMode);
+
+      showToast(
+        lightMode ? 'Light mode enabled.' : 'Dark mode enabled.',
+        'Theme Changed',
+        lightMode ? '☀️' : '🌙'
+      );
+    });
+
     adminBtn.addEventListener('click', async () => {
       if (!supabaseClient) {
         showToast('Admin unavailable ⚙️');
