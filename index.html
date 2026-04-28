@@ -2530,6 +2530,7 @@ async function loadFeaturedScript() {
       adminGrid.style.display = 'grid';
       adminBreakdownWrap.style.display = 'block';
       showToast('Admin login successful 👑');
+      
       await refreshAuthState();
     });
 
@@ -2599,6 +2600,7 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
     if (supabaseClient) {
       trackEvent('page_view');
       refreshAuthState();
+      loadFeaturedScript();
       supabaseClient.auth.onAuthStateChange(() => {
         refreshAuthState();
       });
