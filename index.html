@@ -2096,6 +2096,48 @@ const SCRIPT_DATA = {
 };
 
 async function loadFeaturedScript() {
+  const fallbackName = 'Blade Ball Script';
+  let topName = fallbackName;
+  let topCopies = 0;
+
+  try {
+    if (supabaseClient) {
+      const { data: events, error } = await supabaseClient
+        .from('site_events')
+        .select('script_name')
+        .eq('event_type', 'copy');
+
+      if (!error && events && events.length) {
+        const counts = {};
+
+        events.forEach(event => {
+          if (!event.script_name) return;
+          counts[event.script_name] = (counts[event.script_name] || 0) + 1;
+        });
+
+        const top = Object.entries(counts).sort((a, b) => b[1] - a[1])[0];
+
+        if (top) {
+          topName = top[0];
+          topCopies = top[1];
+        }
+      }
+    }
+  } catch (err) {
+    console.warn('Featured script failed:', err);
+  }
+
+  const script = SCRIPT_DATA[topName] || SCRIPT_DATA[fallbackName];
+
+  document.getElementById('featuredTitle').textContent = topName;
+  document.getElementById('featuredImage').src = script.image;
+  document.getElementById('featuredCopies').textContent = `📋 ${topCopies} copies`;
+  document.getElementById('featuredCode').textContent = script.copy;
+
+  const btn = document.getElementById('featuredCopyBtn');
+  btn.dataset.scriptName = topName;
+  btn.dataset.copy = script.copy;
+}
   if (!supabaseClient) return;
 
   const { data: events, error } = await supabaseClient
@@ -2612,6 +2654,7 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
     setInterval(showLiveFeed, 7000);
     showLiveFeed();
     applyFilters();
+    loadFeaturedScript();
 
     console.assert(typeof applyFilters === 'function', 'applyFilters should exist');
     console.assert(typeof updateLiveStatus === 'function', 'updateLiveStatus should exist');
