@@ -2138,39 +2138,6 @@ async function loadFeaturedScript() {
   btn.dataset.scriptName = topName;
   btn.dataset.copy = script.copy;
 }
-  if (!supabaseClient) return;
-
-  const { data: events, error } = await supabaseClient
-    .from('site_events')
-    .select('script_name')
-    .eq('event_type', 'copy');
-
-  if (error || !events) return;
-
-  const counts = {};
-
-  events.forEach(event => {
-    if (!event.script_name) return;
-    counts[event.script_name] = (counts[event.script_name] || 0) + 1;
-  });
-
-  const top = Object.entries(counts).sort((a, b) => b[1] - a[1])[0];
-
-  const topName = top ? top[0] : 'Blade Ball Script';
-  const topCopies = top ? top[1] : 0;
-  const script = SCRIPT_DATA[topName];
-
-  if (!script) return;
-
-  document.getElementById('featuredTitle').textContent = topName;
-  document.getElementById('featuredImage').src = script.image;
-  document.getElementById('featuredCopies').textContent = `📋 ${topCopies} copies`;
-  document.getElementById('featuredCode').textContent = script.copy;
-
-  const btn = document.getElementById('featuredCopyBtn');
-  btn.dataset.scriptName = topName;
-  btn.dataset.copy = script.copy;
-}
     async function refreshAuthState() {
       if (!supabaseClient) return;
 
