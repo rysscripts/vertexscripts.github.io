@@ -134,8 +134,8 @@
       font-style: italic;
     }
 
-    .brand-mark,
-    -logo {
+.brand-mark,
+.hero-logo {
       display: grid;
       place-items: center;
       background: linear-gradient(180deg, rgba(11,26,30,1), rgba(7,16,14,1));
@@ -1146,7 +1146,17 @@
 body {
   transition: opacity .35s ease, transform .35s ease;
 }
+    
+.hero-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
+.hero-logo .logo-svg {
+  display: block;
+  margin: 0 auto;
+}
     @media (max-width: 640px) {
       .modal-card {
         padding: 20px 18px 18px;
