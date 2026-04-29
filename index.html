@@ -1337,6 +1337,37 @@ body {
   0%,100% { box-shadow: 0 0 10px rgba(255,200,80,0.3); }
   50% { box-shadow: 0 0 22px rgba(255,200,80,0.7); }
 }
+    .unlock-premium-btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.unlock-premium-btn.unlocking {
+  animation: unlockShake .35s ease;
+}
+
+.unlock-premium-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,.35), transparent);
+  transform: translateX(-120%);
+}
+
+.unlock-premium-btn.unlocking::before {
+  animation: unlockShine .8s ease;
+}
+
+@keyframes unlockShine {
+  to { transform: translateX(120%); }
+}
+
+@keyframes unlockShake {
+  0%,100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  50% { transform: translateX(4px); }
+  75% { transform: translateX(-2px); }
+}
   </style>
 </head>
 <body>
@@ -1943,6 +1974,8 @@ body {
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  
   <script>
     const body = document.body;
     const navLinks = document.getElementById('navLinks');
@@ -2667,7 +2700,20 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
     showLiveFeed();
     applyFilters();
     loadFeaturedScript();
+function premiumLocked(button) {
+  button.classList.add('unlocking');
+  button.textContent = '🔓 Checking Access...';
 
+  setTimeout(() => {
+    button.textContent = '🔒 Premium Required';
+    showToast('Premium is not available yet 💎', 'Locked', '🔒');
+  }, 900);
+
+  setTimeout(() => {
+    button.classList.remove('unlocking');
+    button.textContent = '🔒 Unlock Premium';
+  }, 2200);
+}
     console.assert(typeof applyFilters === 'function', 'applyFilters should exist');
     console.assert(typeof updateLiveStatus === 'function', 'updateLiveStatus should exist');
     console.assert(document.getElementById('modal') !== null, 'modal should exist');
