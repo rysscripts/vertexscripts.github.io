@@ -2162,7 +2162,7 @@ await loadFeaturedScript();
     }
 function updateFeaturedFromCounts(scriptCounts) {
 const topName = 'Adopt Me Script';
-const topCopies = 999;
+let featuredScore = Number(localStorage.getItem('adoptMeScore') || '532');
 const script = SCRIPT_DATA[topName];
   const badge = document.getElementById('featuredBadge');
 if (badge) {
@@ -2171,7 +2171,7 @@ if (badge) {
   
   document.getElementById('featuredTitle').textContent = topName;
   document.getElementById('featuredImage').src = script.image;
-  document.getElementById('featuredCopies').textContent = `📋 ${topCopies} copies`;
+document.getElementById('featuredCopies').textContent = `📈 ${featuredScore} popularity score`;
   document.getElementById('featuredCode').textContent = script.copy;
 
   const btn = document.getElementById('featuredCopyBtn');
@@ -2672,6 +2672,23 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
     console.assert(document.getElementById('adminModal') !== null, 'admin modal should exist');
     console.assert(document.getElementById('modalLink') !== null, 'modal link should exist');
     console.assert(document.querySelectorAll('.external-link').length >= 5, 'external links should exist');
+
+    let adoptMeScore = Number(localStorage.getItem('adoptMeScore') || '532');
+
+function updateAdoptMeScore() {
+  const scoreBox = document.getElementById('featuredCopies');
+  if (!scoreBox) return;
+
+  scoreBox.textContent = `📈 ${adoptMeScore} popularity score`;
+}
+
+updateAdoptMeScore();
+
+setInterval(() => {
+  adoptMeScore += Math.random() < 0.25 ? 2 : 1;
+  localStorage.setItem('adoptMeScore', adoptMeScore);
+  updateAdoptMeScore();
+}, 60000);
   </script>
 </body>
 </html>
