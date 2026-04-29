@@ -2126,7 +2126,6 @@ async function loadFeaturedScript() {
   }
 }
 async function refreshAuthState() {
-    async function refreshAuthState() {
       if (!supabaseClient) return;
 
       const { data } = await supabaseClient.auth.getSession();
@@ -2144,7 +2143,44 @@ await loadDashboardStats();
 await loadFeaturedScript();
       }
     }
+function updateFeaturedFromCounts(scriptCounts) {
+  const fallbackName = 'Blade Ball Script';
 
+  const topEntry = Object.entries(scriptCounts)
+    .sort((a, b) => b[1] - a[1])[0];
+
+  const topName = topEntry ? topEntry[0] : fallbackName;
+  const topCopies = topEntry ? topEntry[1] : 0;
+  const script = SCRIPT_DATA[topName] || SCRIPT_DATA[fallbackName];
+
+  document.getElementById('featuredTitle').textContent = topName;
+  document.getElementById('featuredImage').src = script.image;
+  document.getElementById('featuredCopies').textContent = `📋 ${topCopies} copies`;
+  document.getElementById('featuredCode').textContent = script.copy;
+
+  const btn = document.getElementById('featuredCopyBtn');
+  btn.dataset.scriptName = topName;
+  btn.dataset.copy = script.copy;
+}
+
+async function refreshAuthState() {
+  if (!supabaseClient) return;
+
+  const { data } = await supabaseClient.auth.getSession();
+  const loggedIn = !!data.session;
+
+  adminLogoutBtn.style.display = loggedIn ? 'inline-flex' : 'none';
+  adminStatusText.textContent = loggedIn
+    ? 'Connected. Real stats are loading from Supabase.'
+    : 'Not logged in. Use your Supabase email and password.';
+
+  if (loggedIn) {
+    adminGrid.style.display = 'grid';
+    adminBreakdownWrap.style.display = 'block';
+    await loadDashboardStats();
+    await loadFeaturedScript();
+  }
+}
      async function copyText(text, message = 'Script copied successfully ✨') {
       try {
         await navigator.clipboard.writeText(text);
