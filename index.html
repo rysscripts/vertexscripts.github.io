@@ -2132,9 +2132,9 @@ data-icon="images/sab-icon.png">
         statUnique.textContent = String(uniqueSessions);
         statTop.textContent = topEntry ? topEntry[0] : '—';
 
-        adminBreakdown.innerHTML = SCRIPT_NAMES.map(name => `
-          <div class="admin-row"><span>${name}</span><strong>${scriptCounts[name] || 0}</strong></div>
-        `).join('');
+adminBreakdown.innerHTML = SCRIPT_NAMES.map(name => `
+  <div class="admin-row"><span>${name}</span><strong>${scriptCounts[name] || 0}</strong></div>
+`).join('');
       } catch (error) {
         adminStatusText.textContent = `Dashboard load failed: ${error.message}`;
       }
@@ -2282,7 +2282,7 @@ showToast("Copied — Inject in game 🚀", "Success", "📋");
       if (heroVisitorCount) {
         const deltaClass = change >= 0 ? 'delta-up' : 'delta-down';
         const deltaArrow = change >= 0 ? '▲' : '▼';
-        heroVisitorCount.innerHTML = `${fakeVisitors}+ <span class="delta-indicator ${deltaClass}">${deltaArrow} ${Math.abs(change)}</span>`;
+heroVisitorCount.innerHTML = `${fakeVisitors}+ <span class="delta-indicator ${deltaClass}">${deltaArrow} ${Math.abs(change)}</span>`;
       }
     }
 
