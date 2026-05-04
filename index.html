@@ -1437,6 +1437,7 @@ body {
       <div class="eyebrow"><span class="dot"></span> Fast • Reliable • Premium Script Hub</div>
       <h1 class="hero-title">VERTEX <span class="accent">SCRIPTS</span></h1>
       <p class="hero-subtitle">Working &amp; Tested Scripts 🌟</p>
+    
 
 <style>
 .ticker-bar {
@@ -1493,6 +1494,26 @@ body {
 /* pause on hover */
 .ticker-bar:hover .ticker-track {
   animation-play-state: paused;
+}
+  @media (hover: none) and (pointer: coarse) {
+  .card,
+  .spotlight:hover {
+    transform: none !important;
+  }
+
+  .spotlight::before,
+  .spotlight::after,
+  .glass::after {
+    pointer-events: none !important;
+  }
+
+  .btn,
+  .copy-btn,
+  .open-modal {
+    position: relative;
+    z-index: 20;
+    pointer-events: auto;
+  }
 }
 </style>
 
